@@ -1,2 +1,2 @@
-# library-construct
-Tkinter app for keeping track of constructed languages.
+# Library Construct
+App for keeping track of constructed languages.
