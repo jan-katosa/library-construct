@@ -1,0 +1,27 @@
+{
+    "profile1":
+    [
+        {
+            "word_and_translations":
+            [
+                {
+                    "kero": 
+                    [
+                        "noble",
+                        "heroic",
+                        "good"
+                    ],
+                    "narta":
+                    [
+                        "evil"
+                    ],
+                    "zerti":
+                    [
+                        "ugly",
+                        "hideous"
+                    ]
+                }
+            ]
+        }
+    ]
+}
