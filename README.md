@@ -1,2 +1,2 @@
 # Library Construct
-App for keeping track of constructed languages.
+Python asztali alkalmazás mesterséges nyelvek (conlang-ek) tárolására

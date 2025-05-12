@@ -1,6 +1,10 @@
-{
-    "profile1":
-    [
-        {"dictionary": "profile1_dict"}
-    ]
-}
+[
+    {
+        "name":"profile1",
+        "file":"profile1.json"
+    },
+    {
+        "name":"profile2",
+        "file":"profile2.json"
+    }
+]
