@@ -21,12 +21,13 @@ class StartMenu:
         profile_listbox = Listbox(frame)
         profile_listbox.pack()
 
+        data = None
         with open(join("data", "profiles.json"), 'r') as file:
             data = json.load(file)
+            file.close()
 
         for entry in data:
             profile_listbox.insert(END, entry["name"])
-
 
         choose_button = Button(frame, text="Choose", command=self.choose_profile)
         choose_button.pack()
