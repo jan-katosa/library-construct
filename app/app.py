@@ -21,6 +21,7 @@ class StartMenu:
         profile_listbox = Listbox(frame)
         profile_listbox.pack()
 
+        global data
         data = None
         with open(join("data", "profiles.json"), 'r') as file:
             data = json.load(file)
@@ -31,10 +32,12 @@ class StartMenu:
 
         choose_button = Button(frame, text="Choose", command=self.choose_profile)
         choose_button.pack()
-        create_button = Button(frame, text="Create", command=self.create_profile)
-        create_button.pack()
         delete_button = Button(frame, text="Delete", command=self.delete_profile)
         delete_button.pack()
+        create_entry = Entry(frame, borderwidth=5)
+        create_entry.pack()
+        create_button = Button(frame, text="Create", command=lambda: self.create_profile(create_entry.get()))
+        create_button.pack()
         quit_button = Button(frame, text="Quit", command=quit)
         quit_button.pack()
 
@@ -44,21 +47,34 @@ class StartMenu:
         print(f"You have selected {profile_listbox.get(profile_listbox.curselection())}")
 
 
-    def create_profile(self):
-        pass
+    def create_profile(self, name):
+        global data
+        new_json = {"name": name, "file": name+".json"}
+        data.append(new_json)
+        with open(join("data", "profiles.json"), 'w') as file:
+            json.dump(data, file)
 
 
     def delete_profile(self):
-        print(f"You wish to delete {profile_listbox.get(profile_listbox.curselection())}")
-
+        global data
+        data = [x for x in data if x["name"] != profile_listbox.get(profile_listbox.curselection())]
+        with open(join("data", "profiles.json"), 'w') as file:
+            json.dump(data, file)
 
 
 class CreateConlangDialog:
-    def __init__(self, master):
+    def __init__(self, master: Toplevel):
         frame = Frame(master)
 
         entry = Entry(frame)
         entry.pack()
+
+        button = Button(frame, text="Create", command=self.upload)
+        button.pack()
+
+
+    def upload():
+        print("Upload!")
 
 
 app = StartMenu(root)
