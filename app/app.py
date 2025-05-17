@@ -1,6 +1,10 @@
-from os.path import join
+from os.path import join, exists
+from os import remove
 from tkinter import *
 import json
+import model.Conlang as cl
+import model.Word as word
+
 
 root = Tk()
 root.title("Library Construct")
@@ -49,32 +53,34 @@ class StartMenu:
 
     def create_profile(self, name):
         global data
-        new_json = {"name": name, "file": name+".json"}
+        new_json = {"name": name, "file": f"{name}.json"}
         data.append(new_json)
+        
         with open(join("data", "profiles.json"), 'w') as file:
             json.dump(data, file)
+            file.close()
+        
+        lang = cl.Conlang(name)
+
+        #f = open(join("data", "langs", f"{name}.json"), 'w')
+        with open(join("data", "langs", f"{name}.json"), 'w') as outfile:
+            json.dump(lang, outfile)
+            outfile.close()
 
 
     def delete_profile(self):
+        name = profile_listbox.get(profile_listbox.curselection())
         global data
-        data = [x for x in data if x["name"] != profile_listbox.get(profile_listbox.curselection())]
+        data = [x for x in data if x["name"] != name]
         with open(join("data", "profiles.json"), 'w') as file:
             json.dump(data, file)
+            file.close()
+        if exists(join("data", "langs", f"{name}.json")):
+            remove(join("data", "langs", f"{name}.json"))
+        else:
+            print("Profile does not exist!")
 
-
-class CreateConlangDialog:
-    def __init__(self, master: Toplevel):
-        frame = Frame(master)
-
-        entry = Entry(frame)
-        entry.pack()
-
-        button = Button(frame, text="Create", command=self.upload)
-        button.pack()
-
-
-    def upload():
-        print("Upload!")
+        
 
 
 app = StartMenu(root)
